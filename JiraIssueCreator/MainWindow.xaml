@@ -1,13 +1,47 @@
-﻿<Window x:Class="JiraIssueCreator.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JiraIssueCreator"
+        xmlns:CustomControls="clr-namespace:JiraIssueCreator.CustomControls" x:Class="JiraIssueCreator.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Label x:Name="lblSearchCustomer" Content="Search for project" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+    <Window.Resources>
+        <XmlDataProvider x:Key="xml" Source="http://www.nws.noaa.gov/xml/current_obs/index.xml" DataChanged="XmlDataProvider_DataChanged"/>
+        <DataTemplate x:Key="TheItemTemplate">
+            <Border BorderBrush="Salmon" BorderThickness="2" CornerRadius="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="ID:  "/>
+                    <TextBlock Grid.Column="1" Text="{Binding XPath=station_id}"/>
+                    <TextBlock Grid.Row="1" Text="Name:  "/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding XPath=station_name}"/>
+                    <TextBlock Grid.Row="2" Text="RSS URL:  "/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding XPath=rss_url}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
 
+    <Grid>
+        <!--<Label x:Name="lblSearchCustomer" Content="Search for project" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>-->
+        <TextBlock x:Name="StatusLabel" Text="Loading Data..." Margin="20,20,0,0"/>
+
+        <CustomControls:AutoCompleteTextBox x:Name="actbProject" 
+            Margin="20,40,20,0"
+            VerticalAlignment="Top" 
+            ItemsSource="{Binding Source={StaticResource xml}, XPath=//station}" 
+            ItemTemplate="{StaticResource TheItemTemplate}"
+            Binding="{Binding XPath=station_id}" 
+            MaxCompletions="10"/>
     </Grid>
 </Window>

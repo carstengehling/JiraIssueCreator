@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Xml;
 
 namespace JiraIssueCreator
 {
@@ -23,6 +12,20 @@ namespace JiraIssueCreator
         public MainWindow()
         {
             InitializeComponent();
+
+            actbProject.Filter = Filter;
         }
-    }
+        private bool Filter(object obj, string text)
+        {
+            XmlElement element = (XmlElement)obj;
+            string StationName = element.SelectSingleNode("station_name").InnerText.ToLower();
+            if (StationName.Contains(text.ToLower()))
+                return true;
+            return false;
+        }
+
+        private void XmlDataProvider_DataChanged(object sender, EventArgs e)
+        {
+            StatusLabel.Text = "Xml Data Loaded.";
+        }}
 }

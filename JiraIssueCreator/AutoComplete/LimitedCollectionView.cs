@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
 using System.Collections;
+using System.Windows.Data;
 
-namespace JiraIssueCreator.AutoComplete
+namespace JiraIssueCreator.CustomControls
 {
     public class LimitedCollectionView : CollectionView, IEnumerable
     {
