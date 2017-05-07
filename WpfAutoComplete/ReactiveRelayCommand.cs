@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Input;
 using System.Diagnostics;
 using System.Reactive.Subjects;
+using System.Windows.Input;
 
 namespace WpfAutoComplete
 {
