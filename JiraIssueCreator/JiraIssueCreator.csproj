@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,7 +67,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Controllers\IMainControllse.cs" />
+    <Compile Include="Jira\DTO\AvailableTransitions.cs" />
+    <Compile Include="Jira\DTO\Filter.cs" />
+    <Compile Include="Jira\DTO\Project.cs" />
+    <Compile Include="Jira\DTO\Issue.cs" />
+    <Compile Include="Jira\DTO\IssueFields.cs" />
+    <Compile Include="Jira\DTO\SearchResult.cs" />
+    <Compile Include="Jira\DTO\Transition.cs" />
+    <Compile Include="Jira\IJiraApiRequester.cs" />
+    <Compile Include="Jira\IJiraApiRequestFactory.cs" />
+    <Compile Include="Jira\IRestClientFactory.cs" />
+    <Compile Include="Jira\IRestRequestFactory.cs" />
+    <Compile Include="Jira\JiraApiRequester.cs" />
+    <Compile Include="Jira\JiraApiRequestFactory.cs" />
+    <Compile Include="Jira\JiraClient.cs" />
+    <Compile Include="Jira\RestClientFactory.cs" />
+    <Compile Include="Jira\RestRequestFactory.cs" />
+    <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +109,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,6 +124,9 @@
       <Project>{208a81cc-d4e6-480b-839d-56c138f0d343}</Project>
       <Name>WpfAutoComplete</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

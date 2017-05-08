@@ -23,6 +23,26 @@ namespace JiraIssueCreator
         public MainWindow()
         {
             InitializeComponent();
+
+            string baseUrl = "";
+            string username = "";
+            string password = "";
+
+            var jiraApiRequestFactory = new JiraApiRequestFactory(
+                new RestRequestFactory()
+            );
+
+            var jiraClient = new JiraClient(
+                jiraApiRequestFactory,
+                new JiraApiRequester(
+                    new RestClientFactory(),
+                    jiraApiRequestFactory
+                )
+            );
+
+
+
+
             DataContext = new MainWindowViewModel();
         }
     }
